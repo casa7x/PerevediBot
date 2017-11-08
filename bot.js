@@ -116,7 +116,7 @@ function otherDoc(chatId, msg){
 	bot.sendMessage(chatId, 'Введите количество страниц');
 	console.log(otherDoc.text);
 
-		bot.on('message', function(msg){
+		bot.once('message', function(msg){
 			if(isNaN(msg.text)){
 			}
 			else{
@@ -266,31 +266,16 @@ function chanel(chatId, msg){
 }
 function giveCallback (chatId, msg){
 	bot.sendMessage(chatId, "Введите Ваши данные"); 
-		bot.on('message', function(msg){
-			if(msg.text.includes('@')){
-				var mail = msg.text;
-			}
-			else if(isNaN(msg.text)){
-
-			}
-			else{
-				var phone = msg.text;
-			}
-			switch(msg.text){
-				case mail:
-				sending(chatId,msg);
-				bot.sendMessage(chatId, "Ваша заявка принята"); 
-				mainMenu(chatId, msg);
-				break
-				case phone:
-				sending(chatId,msg);
-				bot.sendMessage(chatId, "Ваша заявка принята"); 
-				mainMenu(chatId, msg);
-				break
-				default:
-
-			}
-	});
+		bot.once('message', function(msg){
+				if(isNaN(msg.text)){
+					return false;
+				}
+				else{
+				bot.sendMessage(chatId, "Ваша заявка принята");
+				info(chatId);
+				return sending(chatId,msg);
+				}
+			});
 }
 function sending(chatId, msg){
 	let from_first = msg.from.first_name;
