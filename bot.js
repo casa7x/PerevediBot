@@ -37,6 +37,7 @@ bot.on('message', function(msg){
 		case 'Чешский \u{1F1E8}\u{1F1FF}':
 		case 'Польский \u{1F1F5}\u{1F1F1}':
 		checkOut(chatId, msg);
+		// islegalization(chatId, msg);
 		break;
 		case 'Нет, продолжить \u{21AA}':
 		price(chatId, jsonContent, msg);
@@ -122,6 +123,7 @@ function otherDoc(chatId, msg){
 			else{
 				priceOtherDoc(chatId, msg, jsonContent);
 				info(chatId);
+				return;
 			}
 		});
 }
@@ -266,7 +268,7 @@ function chanel(chatId, msg){
 }
 function giveCallback (chatId, msg){
 	bot.sendMessage(chatId, "Введите Ваши данные"); 
-		bot.once('message', function(msg){
+			bot.once('message', function(msg){
 				if(isNaN(msg.text)){
 					return false;
 				}
@@ -275,7 +277,7 @@ function giveCallback (chatId, msg){
 				info(chatId);
 				return sending(chatId,msg);
 				}
-			});
+			});			
 }
 function sending(chatId, msg){
 	let from_first = msg.from.first_name;
